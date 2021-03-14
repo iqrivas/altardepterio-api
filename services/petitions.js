@@ -1,28 +1,36 @@
 const petitionMocks = require('../utils/mocks/petitions');
+const MongoLib = require('../lib/mongo');
 
 class PetitionsService {
     constructor() {
-
+        this.collection = 'requests';
+        this.mongoDB = new MongoLib();
     }
 
-    getProducts ({tags}) {
-        return Promise.resolve(petitionMocks)
+    async getPetitions ({tags}) {
+        const query = tags && {sqid: { $in: tags}};
+        const petitions = await this.mongoDB.getAll(this.collection, query);
+        return petitions || [];
     }
 
-    getProduct ({petitionId}) {
-        return Promise.resolve(petitionMocks[0])
+    async getPetition ({petitionId}) {
+        const petition = await this.mongoDB.get(this.collection, petitionId);
+        return petition || {};
     }
 
-    createProduct ({petitionBody}) {
-        return Promise.resolve(petitionMocks[0])
+    async createPetition ({petitionBody}) {
+        const createdPetitionId = await this.mongoDB.create(this.collection, petitionBody);
+        return createdPetitionId;
     }
 
-    updateProduct ({petitionId, petitionBody}) {
-        return Promise.resolve(petitionMocks[0])
+    async updatePetition ({petitionId, petitionBody}) {
+        const updatedPetitionId = await this.mongoDB.update(this.collection, petitionId, petitionBody);
+        return updatedPetitionId;
     }
 
-    deleteProduct ({petitionId}) {
-        return Promise.resolve(petitionMocks[0])
+    async deletePetition ({petitionId}) {
+        const deletedPetitionId = await this.mongoDB.delete(this.collection, petitionId);
+        return deletedPetitionId;
     }
 
 }

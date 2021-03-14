@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
     const {tags} = req.query;
 
     try {
-    const petitions = await petitionsService.getProducts({tags});
+    const petitions = await petitionsService.getPetitions({tags});
     res.status(200).json({
         data: petitions,
         message: 'Peticiones listadas'
@@ -23,7 +23,7 @@ router.get('/:petitionId', async (req, res, next) => {
     const {petitionId} = req.params;
 
     try {
-        const petition = await petitionsService.getProduct({petitionId});
+        const petition = await petitionsService.getPetition({petitionId});
         res.status(200).json({
             data: petition,
             message: 'Petición listada'
@@ -39,7 +39,7 @@ router.post('/', async (req, res, next) => {
     const {body: petitionBody} = req;
 
     try{
-        const petition = await petitionsService.createProduct({petitionBody});
+        const petition = await petitionsService.createPetition({petitionBody});
         res.status(201).json({
             data: petition,
             message: 'Petición creada'
@@ -54,7 +54,7 @@ router.put('/:petitionId', async (req, res, next) => {
     const {petitionId} = req.params;
     const {body: petitionBody} = req;
     try{
-        const petition = await petitionsService.updateProduct({petitionId, petitionBody});
+        const petition = await petitionsService.updatePetition({petitionId, petitionBody});
         res.status(200).json({
             data: petition,
             message: 'Petición actualizada'
@@ -67,7 +67,7 @@ router.put('/:petitionId', async (req, res, next) => {
 router.delete('/:petitionId', async (req, res, next) => {
     const {petitionId} = req.params;
     try {
-        const petition = await petitionsService.deleteProduct({petitionId});
+        const petition = await petitionsService.deletePetition({petitionId});
         res.status(200).json({
             data: petition,
             message: 'Petición eliminada'
