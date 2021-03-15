@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 
 //CORS
 const allowedOrigins = ['http://localhost:3000',
-                      'https://iqrivas.github.io/'];
+                      'https://iqrivas.github.io'];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 
