@@ -30,5 +30,5 @@ app.use(express.json());
 app.use("/api/petitions", petitionAPIRouter)
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`API listening at http://localhost:${port}`)
 })
